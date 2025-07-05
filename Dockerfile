@@ -1,21 +1,27 @@
-# Dockerfile
+# Use official Python image
+FROM python:3.11-slim
 
-FROM python:3.10-slim
-
-# Install Graphviz
-RUN apt-get update && apt-get install -y graphviz
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
 # Set working directory
 WORKDIR /app
 
-# Copy project files
-COPY . .
+# Copy requirements first for caching
+COPY requirements.txt .
 
-# Install Python dependencies
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port Render will assign
-EXPOSE 8000
+# Copy the rest of your code
+COPY . .
 
-# Run your Streamlit app with the Render-assigned port
-CMD ["streamlit", "run", "app.py", "--server.port=$PORT", "--server.enableCORS=false"]
+# Expose the port Streamlit will run on
+EXPOSE 8080
+
+# Use environment variable PORT (required by Render), with fallback
+ENV PORT 8080
+
+# Set Streamlit to run using the environment PORT
+CMD streamlit run app.py --server.port=$PORT --server.address=0.0.0.0
