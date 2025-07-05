@@ -1,3 +1,4 @@
 streamlit==1.32.0
 diagrams==0.23.4
 graphviz==0.20.1
+numpy==1.26.4  # Explicitly pin this version
