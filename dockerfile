@@ -2,13 +2,13 @@
 
 FROM python:3.10-slim
 
-# Install system dependencies
+# Install Graphviz
 RUN apt-get update && apt-get install -y graphviz
 
-# Set working directory
+# Set work directory
 WORKDIR /app
 
-# Copy project files
+# Copy all project files
 COPY . .
 
 # Install Python dependencies
