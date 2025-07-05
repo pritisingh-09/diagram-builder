@@ -2,26 +2,25 @@
 FROM python:3.11-slim
 
 # Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-# Set working directory
+# Create working directory
 WORKDIR /app
 
-# Copy requirements first for caching
-COPY requirements.txt .
-
 # Install dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of your code
+# Copy the app
 COPY . .
 
-# Expose the port Streamlit will run on
+# Expose the port (optional, but good practice)
 EXPOSE 8080
 
-# Use environment variable PORT (required by Render), with fallback
-ENV PORT 8080
+# Let Render inject the PORT environment variable
+# Default to 8080 for local testing
+ENV PORT=8080
 
-# Set Streamlit to run using the environment PORT
+# Correct CMD without quotes
 CMD streamlit run app.py --server.port=$PORT --server.address=0.0.0.0
