@@ -2,6 +2,11 @@ services:
   - type: web
     name: diagram-builder
     env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: |
+      bash -c "
+        apt-get update &&
+        apt-get install -y graphviz &&
+        streamlit run app.py
+      "
     plan: free
-    buildCommand: "./setup.sh"
-    startCommand: "streamlit run app.py --server.port=$PORT"
