@@ -2,5 +2,5 @@ services:
   - type: web
     name: diagram-builder
     env: docker
-    dockerfilePath: dockerfile
     plan: free
+    dockerfilePath: ./dockerfile
