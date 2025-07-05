@@ -1,3 +1,3 @@
-streamlit
-diagrams
-graphviz
+streamlit==1.32.0
+diagrams==0.23.4
+graphviz==0.20.1
