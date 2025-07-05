@@ -1,8 +1,9 @@
 #!/bin/bash
-set -e  # Exit on error
+set -e
 
-# System dependencies (no sudo needed)
-apt-get update && apt-get install -y graphviz
+# Install system dependencies (Render doesn't allow apt-get)
+curl -sL https://deb.nodesource.com/setup_14.x | bash -
+apt-get install -y graphviz
 
-# Python dependencies
+# Install Python dependencies
 pip install -r requirements.txt
