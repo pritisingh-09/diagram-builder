@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: diagram-builder
+    env: python
+    pythonVersion: "3.10"
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run main.py --server.port=$PORT --server.headless=true
