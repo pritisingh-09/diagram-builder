@@ -14,8 +14,8 @@ COPY . .
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Streamlit runs on port 8501
-EXPOSE 8501
+# Expose the port Render will assign
+EXPOSE 8000
 
-# Run your Streamlit app
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.enableCORS=false"]
+# Run your Streamlit app with the Render-assigned port
+CMD ["streamlit", "run", "app.py", "--server.port=$PORT", "--server.enableCORS=false"]
